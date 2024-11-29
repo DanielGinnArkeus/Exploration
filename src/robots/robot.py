@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 
 @dataclass
-class Movement():
+class Movement:
     dx: int
     dy: int
 
 
-class Location():
+class Location:
     x: int
     y: int
 
@@ -14,16 +14,18 @@ class Location():
         self.x = x
         self.y = y
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Location):
+            return NotImplemented
         if self.x == other.x and self.y == other.y:
             return True
         else:
             return False
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Location({self.x}, {self.y})"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"({self.x}, {self.y})"
 
     def move(self, direction: Movement) -> bool:
@@ -37,7 +39,7 @@ class Robot:
         self.location = location
 
     def move(self, direction: Movement) -> bool:
-        self.location.move(direction)
-        return False
+        result = self.location.move(direction)
+        return result
 
 
